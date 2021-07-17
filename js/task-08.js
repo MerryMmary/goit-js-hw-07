@@ -22,103 +22,43 @@ input и нажимает кнопку Создать, после чего ре�
 
 <div id="boxes"></div>
 */
-const createBtnEl = document.querySelector('button[data-action="render"]');
-console.log('createBtnEl', createBtnEl);
+const createBtnRef = document.querySelector('button[data-action="render"]');
+console.log('createBtnRef', createBtnRef);
 
-const deleteBtnEl = document.querySelector('button[data-action="destroy"]');
-console.log('deleteBtnEl', deleteBtnEl);
+const deleteBtnRef = document.querySelector('button[data-action="destroy"]');
+console.log('deleteBtnRef', deleteBtnRef);
 
 const boxesRef = document.querySelector('#boxes');
+boxesRef.style = ('display:flex; flex-wrap: wrap; justify-content: center; align-items: center;')
 console.log('boxesRef', boxesRef);
 
 const userRectQuantity = document.querySelector('#controls input');
-console.dir('userRectQuantity', userRectQuantity); // doesn't read value
+console.dir('userRectQuantity', userRectQuantity.value); // doesn't read value
 
 
-//userRectQuantity.addEventListener('input', countRectanglesListener);
+createBtnRef.addEventListener('click', createBoxes);
+deleteBtnRef.addEventListener('click', destroyBoxes);
 
+function createBoxes() {
+  const boxHeight = 20;
+  const boxWidth = 20;
 
+  const amount = Number(userRectQuantity.value);
+  console.log('amount in createBoxes()', amount);
 
-// function countRectanglesListener(event) {
-//     console.log('event.currentTarget.value', event.target.value);
-//     const amount = Number(event.target.value); // === this.value
-    
-//     return amount;
-// }
-
-// let amount = userRectQuantity.value;
-// console.log('let amount', amount);
- 
-userRectQuantity.addEventListener('blur', onInputBlur);
-
-function onInputBlur() {
-    const amount = userRectQuantity.innerHTML;
-    console.log('onInputBlur() amount', amount);
-    return amount;
-}
-
-// const amount = function onInputBlur(e) {
-//     console.log(userRectQuantity.value);
-// }
-
-let rectArr = [];
-function createBoxes(amount, onInputBlur) {
-    //userRectQuantity.removeEventListener(countRectanglesListener);
-    console.log('onInputBlur in func', onInputBlur); 
-    console.log('amount in func', amount);
-    //let rectArr = [];
-    console.log('amount in func', amount); // ===> mouseEvent :((((
-    for (let i = 1; i <= amount; i += 1) {
-        console.log('i', i);
-        rectArr.push(`<div class="box" style="width:${20 + 10 * i}px; height:${20 + 10 * i}px; background-color: rgb(${Math.round((Math.random() * (255 - 1) + 1))}, ${Math.round((Math.random() * (255 - 1) + 1))}, ${Math.round((Math.random() * (255 - 1) + 1))});"> 
-        </div>`);
-    }
-
-    console.log("rectArr.join('')", rectArr.join('')); // array of created <div>-s
-
-    console.log(boxesRef.insertAdjacentHTML('beforeend', `${rectArr.join('')}`));
-    //return boxesRef.insertAdjacentHTML('afterbegin', rectArr.join(''));
-    return rectArr;
-
-}
-console.log('rectArr', rectArr);
-
-createBtnEl.addEventListener('click', createBoxes);
-// function onClickcreateBtn() {
-//     boxesRef.insertAdjacentHTML('afterbegin', rectArr.join(''));
-// }
-
-
-/*
-const repeat = function (n, action) {
-  for (let i = 0; i < n; i += 1) {
-    action(i);
+  let rectArr = [];
+  for (let i = 1; i <= amount; i += 1) {
+    console.log('i', i);
+    rectArr.push(`<div class="box" style="width:${boxWidth + 10 * i}px; height:${boxHeight + 10 * i}px; margin: 10px; background-color: rgb(${Math.round((Math.random() * (255 - 1) + 1))}, ${Math.round((Math.random() * (255 - 1) + 1))}, ${Math.round((Math.random() * (255 - 1) + 1))});"> 
+    </div>`);
   }
-};
+  
+    //rectArr.join(''); // array of created <div>-s to string 
 
+    boxesRef.insertAdjacentHTML('beforeend', `${rectArr.join('')}`);
 
-function makeMessage(pizzaName, callback) {
-  return callback(pizzaName);
 }
-*/
 
-
-
-
-
-// function generateRectangles(event) {
-//     console.log('event.currentTarget.value', event.currentTarget.value);
-//     const userRectAmount = event.Target.value; // Entered quantity
-
-//     let rectArr = [];
-//     for (let i = 1; i <= userRectAmount; i += 1) {
-//         rectArr.push(`<div class="box" style="width:${20 + 10 * i}px; height:${20 + 10 * i}px; background-color: rgb(${Math.round((Math.random() * (255 - 1) + 1))}, ${Math.round((Math.random() * (255 - 1) + 1))}, ${Math.round((Math.random() * (255 - 1) + 1))});"> 
-//         </div>`);
-//     }
-
-//     console.log("rectArr.join('')", rectArr.join('')); // array of created <div>-s
-
-//     console.log(boxesRef.insertAdjacentHTML('beforeend', `${rectArr.join('')}`));
-//     return boxesRef.insertAdjacentHTML('afterbegin', rectArr.join(''));
-
-// }
+function destroyBoxes() {
+  boxesRef.innerHTML = '';
+}

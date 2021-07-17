@@ -33,7 +33,7 @@ console.log('inputRef is —', inputRef);
 const inputRefDataLength = Number(inputRef.dataset.length); // select data-attribute -> 6
 console.log('inputRefDataLength is —', inputRefDataLength);
 
-inputRef.addEventListener('input', onValidationInput);
+inputRef.addEventListener('blur', onValidationInput);
 
 function onValidationInput() {
     console.log('inputRef.value.length is —', inputRef.value.length);
@@ -41,8 +41,8 @@ function onValidationInput() {
        inputRef.classList.add('invalid');
        console.log('Not valid!!!');
      } else {
+       inputRef.classList.remove('invalid');
        inputRef.classList.add('valid');
        console.log('OK!');
-       inputRef.classList.remove('invalid');
      }
 }

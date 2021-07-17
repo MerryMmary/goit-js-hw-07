@@ -39,6 +39,7 @@ function onValidationInput() {
     console.log('inputRef.value.length is —', inputRef.value.length);
      if (inputRef.value.length !== inputRefDataLength) {
        inputRef.classList.add('invalid');
+       inputRef.classList.remove('valid');
        console.log('Not valid!!!');
      } else {
        inputRef.classList.remove('invalid');

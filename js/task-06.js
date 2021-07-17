@@ -28,19 +28,21 @@
 */
 
 const inputRef = document.querySelector('#validation-input');
-console.log(inputRef);
+console.log('inputRef is —', inputRef);
 
-const inputRefDataLength = inputRef.dataset.length; // select data-attribute -> 6
-console.log(inputRefDataLength);
+const inputRefDataLength = Number(inputRef.dataset.length); // select data-attribute -> 6
+console.log('inputRefDataLength is —', inputRefDataLength);
 
 inputRef.addEventListener('input', onValidationInput);
 
 function onValidationInput() {
-    console.log(inputRef.value.length);
-     if (inputRef.value.length <= inputRefDataLength) {
-         inputRef.classList.add('valid');
+    console.log('inputRef.value.length is —', inputRef.value.length);
+     if (inputRef.value.length !== inputRefDataLength) {
+       inputRef.classList.add('invalid');
+       console.log('Not valid!!!');
      } else {
-        inputRef.classList.remove('valid');
-        inputRef.classList.add('invalid');
-        }
+       inputRef.classList.add('valid');
+       console.log('OK!');
+       inputRef.classList.remove('invalid');
+     }
 }

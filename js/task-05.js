@@ -23,7 +23,7 @@ function onNameInput(event) {
     console.log(event.currentTarget.value); // current input
     //nameOutputRef.textContent = this.value;
 
-    event.currentTarget.value !==' '
+    event.currentTarget.value !==''
     ? nameOutputRef.textContent = event.currentTarget.value
     : nameOutputRef.textContent = 'незнакомец';
 }
